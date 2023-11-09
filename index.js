@@ -1,5 +1,6 @@
 const express= require("express")
 const cors = require("cors");
+require("dotenv").config();
 const { connection } = require("./db");
 const { urlRouter } = require("./routes/url.route");
 const PORT=8080
@@ -13,7 +14,7 @@ app.get("/",(req,res)=>{
     res.send({"msg":"This is the HOME "})
 })
 
-app.listen(PORT,async()=>{
+app.listen(process.env.PORT,async()=>{
     try {
         await connection
         console.log("Connected to DB")
