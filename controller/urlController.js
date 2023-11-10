@@ -38,7 +38,11 @@ const validURL= async(req,res,next)=>{
 
 const redirectToURL=async(req,res)=>{
     const id= req.params.id;
+    const customUrl= req.params.customUrl
+    console.log("Curl",customUrl)
     const originalLink= await UrlModel.findOne({id})
+    console.log(id)
+    console.log(originalLink)
     if(!originalLink){
         return res.status(400).send({"error":"URL not found"})
     }

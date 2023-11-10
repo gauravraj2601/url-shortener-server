@@ -4,5 +4,5 @@ const { validURL, shortURL, redirectToURL } = require("../controller/urlControll
 const urlRouter= express.Router()
 
 urlRouter.post("/",validURL,shortURL);
-urlRouter.get("/:id", redirectToURL)
+urlRouter.get("/:id/:customUrl", redirectToURL)
 module.exports={urlRouter}
