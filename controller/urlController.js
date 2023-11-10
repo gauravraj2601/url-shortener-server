@@ -24,9 +24,9 @@ const validURL= async(req,res,next)=>{
 }
 
  const shortURL= async(req,res)=>{
-    const {url, customUrl, expiryDate}= req.body;
+    const {url, customUrl, expiryTime}= req.body;
     let id= shortid.generate();
-    const newURL= new UrlModel({url,customUrl,expiryDate,id})
+    const newURL= new UrlModel({url,customUrl,expiryTime,id})
     
     try {
         await newURL.save();
@@ -53,9 +53,24 @@ const redirectToURL=async(req,res)=>{
     // res.send({"msg":`${originalLink.url}`})
 
 }
+const deleteURL = async (req, res) => {
+    const id = req.params.id;
 
+    try {
+        const deletedURL = await UrlModel.findOneAndDelete({ id });
+
+        if (!deletedURL) {
+            return res.status(404).json({ error: "URL not found" });
+        }
+
+        res.status(200).json({ message: "URL deleted successfully", deletedURL });
+    } catch (error) {
+        res.status(500).json({ error: "Internal Server Error", details: error.message });
+    }
+};
 module.exports={
     validURL,
     shortURL,
-    redirectToURL
+    redirectToURL,
+    deleteURL
 }

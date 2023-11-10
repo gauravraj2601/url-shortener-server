@@ -3,7 +3,7 @@ const mongoose= require("mongoose")
 const urlSchema=mongoose.Schema({
     url:{type:String, required:true, unique:true},
     customUrl:{type:String},
-    expiryDate:{type:Date},
+    expiryTime:{type:Number},
     visits:{type:Number,default:0},
     id:{require:true, type:String}
 })
