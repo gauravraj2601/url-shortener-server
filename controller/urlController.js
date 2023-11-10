@@ -30,7 +30,7 @@ const validURL= async(req,res,next)=>{
     
     try {
         await newURL.save();
-        res.status(200).send({"msg":`http:URLshortener.com/${newURL.customUrl}`,id})
+        res.status(200).send({"msg":`http:url-shortener.com/${newURL.customUrl}`,id})
     } catch (error) {
         res.status(400).send({"err_shortURL":error.message,"URL_exist":"URL Already Exist"})
     }
