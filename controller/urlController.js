@@ -11,7 +11,10 @@ const validURL= async(req,res,next)=>{
     const {url}= req.body;
     urlExists(url, function(err, exists) {
         if(err){
-            return res.send({"msg":"Invalid URL"})
+            return res.send({"err":"Invalid URL"})
+        }
+        else if(exists===false){
+            return res.send({"err":"Invalid URL"})
         }
         else{
             console.log("url",exists)
@@ -27,9 +30,9 @@ const validURL= async(req,res,next)=>{
     
     try {
         await newURL.save();
-        res.status(200).send({"msg":`http:URLshortener.com/${newURL.customUr}`,id})
+        res.status(200).send({"msg":`http:URLshortener.com/${newURL.customUrl}`,id})
     } catch (error) {
-        res.status(400).send({"err_shortURL":error.message})
+        res.status(400).send({"err_shortURL":error.message,"URL_exist":"URL Already Exist"})
     }
 }
 
